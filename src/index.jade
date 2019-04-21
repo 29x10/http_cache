@@ -1,0 +1,80 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        title Cache
+
+        link(rel='stylesheet', type='text/css', href='build/build.css')
+
+    body
+
+        article
+
+            section
+                h1 HTTP Cache
+                br
+                br
+                a(href='http://tools.ietf.org/pdf/rfc7232.pdf') rfc7232 
+
+            section
+                h2 概念
+                pre
+                    code.language-http.
+                        GET / HTTP/1.1
+                        Expires: Tue, 03 Mar 2015 12:03:57 GMT
+                        Cache-Control: private, max-age=0
+                        Last-Modified: Tue, 03 Mar 2015 12:03:57 GMT
+                        ETag: "d0d2d53e"
+                        Content-Length: 146
+                        Date: Tue, 03 Mar 2015 12:03:57 GMT
+                        If-Modified-Since:Tue, 03 Mar 2015 12:29:23 GMT
+                        If-None-Match:"d0d2d53e"
+            section
+                h2.bullet Cache-Control
+                ul
+                    li private
+                    li public
+                    li CDN
+                    li max-age
+                    li no-cache
+                    li no-store
+
+            section
+                h2.bullet Response Status
+                ul
+                    li 200 OK
+                    li 304 Not Modified
+                
+
+            section
+                h2.bullet Validate
+                ul
+                    li Server: Expires
+                    li Client: If-Modified-Since
+                    li Server: ETag
+                    li Client: If-None-Match
+            
+            section
+                h2 跨域
+                a(href='http://www.w3.org/TR/cors/') W3C标准
+                ul.bullet
+                    li Access-Control-Allow-Origin
+                    li Cache-Control
+                    li Content-Language
+                    li Content-Type
+                    li Expires
+                    li Last-Modified
+                    li Pragma
+                    li Access-Control-Expose-Headers
+                    
+
+            section.emphatic-text
+                h2 Nginx静态文件配置
+                pre
+                    code.language-javascript.
+                        expires      30d;
+                        add_header   Cache-Control public;
+                        access_log   off;
+
+        script(src='build/build.js')
